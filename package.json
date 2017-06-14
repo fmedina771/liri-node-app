@@ -1,0 +1,27 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "I am the commander",
+  "main": "liri.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmedina771/liri-node-app.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Fernando Medina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fmedina771/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/fmedina771/liri-node-app#readme",
+  "dependencies": {
+    "omdb": "^0.8.0",
+    "request": "^2.81.0",
+    "twit": "^2.2.5"
+  }
+}
