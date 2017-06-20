@@ -2,10 +2,13 @@
 //====================== Node.js Application ===================
 //==============================================================
 
-//====================== GLOBAL VARIABLES ======================
+//====================== Constants ======================
+
+// User inputs
 const input1 = process.argv[2];
 const input2 = process.argv.slice(3);
 
+// Requires
 const keys = require('./keys')
 const spotify = require('spotify');
 const Twit = require('twit');
@@ -58,14 +61,20 @@ if (input1 === 'my-tweets') {
         console.log(data)
         console.log(input2)
     });
+    // If user inputs 'movie-this' run the following code
 } else if (input1 === 'movie-this') {
+    // Link to OMDB API
     const queryUrl = "http://www.omdbapi.com/?t=" + input2 + "&y=&plot=short&apikey=40e9cece";
-
+    // Requesting data from OMDB
     request(queryUrl, function(error, response, body) {
+            // If error occurs during request, console log the error
             if (error) {
                 return console.error(error)
-            } // end of error if 
+            }// end of error if
+
+            // Using JSON.parse to parse a JSON string
             const responseJson = JSON.parse(body)
+            // What data will be loged
             console.log(responseJson.Title)
             console.log(responseJson.Year)
             console.log(responseJson.imdbRating)
@@ -73,22 +82,22 @@ if (input1 === 'my-tweets') {
             console.log(responseJson.Language)
             console.log(responseJson.Plot)
             console.log(responseJson.Actors)
-            // console.log(responseJson.)
-        }) //end of request
+        })//end of request
 } // end of if else
-else if (input1 === "do-what-it-says"){
+// If user inputs 'do-what-it-says' run the following code
+else if (input1 === "do-what-it-says") {
 
     console.log("spotify sucks for changing the terms of their API")
 
+    // Reading a the file 'random.txt'
     fs.readFile('random.txt', 'utf8', function(error, fileContents) {
-    if (error) {
-        console.error(error)
-    }
-    console.log(fileContents)
+        if (error) {
+            console.error(error)
+        }
+        console.log(fileContents)
 
-})
+    })
 
-    
+
 
 } //end of else if "do-what-it-says"
-
