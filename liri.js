@@ -1,18 +1,22 @@
+//==============================================================
+//====================== Node.js Application ===================
+//==============================================================
+
 //====================== GLOBAL VARIABLES ======================
 const input1 = process.argv[2];
-const input2 = process.argv[3];
+const input2 = process.argv.slice(3);
 
-var spotify = require('spotify');
-var Twit = require('twit');
-// var omdb = require('omdb');
-var request = require('request')
+const keys = require('./keys')
+const spotify = require('spotify');
+const Twit = require('twit');
+const request = require('request')
+const fs = require('fs')
 
 
 //====================== Twitter  ======================
-var keys = require('./keys')
 
-
-let T = new Twit({
+// Twitter API keys
+const T = new Twit({
     consumer_key: keys.twitterKeys.consumer_key,
     consumer_secret: keys.twitterKeys.consumer_secret,
     access_token: keys.twitterKeys.access_token,
@@ -20,13 +24,16 @@ let T = new Twit({
 });
 
 // Parameters to use when getting tweets
-var tParams = {
+const tParams = {
     screen_name: 'go4nando',
     count: 20
 };
 
+
+
 // If user inputs 'my-tweets' run the following code
 if (input1 === 'my-tweets') {
+
     T.get('statuses/user_timeline', tParams, gotData);
 
     // Function to cycle through tweets after data is received
@@ -41,7 +48,7 @@ if (input1 === 'my-tweets') {
     // If user inputs 'spotify-this-song' run the following code    
 } else if (input1 === 'spotify-this-song') {
     console.log("spotify")
-    spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+    spotify.search({ type: 'track', query: 'we are the world' }, function(err, data) {
         if (err) {
             console.log('Error occurred: ' + err);
             return;
@@ -71,28 +78,17 @@ if (input1 === 'my-tweets') {
 } // end of if else
 else if (input1 === "do-what-it-says"){
 
+    console.log("spotify sucks for changing the terms of their API")
+
+    fs.readFile('random.txt', 'utf8', function(error, fileContents) {
+    if (error) {
+        console.error(error)
+    }
+    console.log(fileContents)
+
+})
+
+    
+
 } //end of else if "do-what-it-says"
 
-
-
-
-
-
-//     if (!error) {
-//         var results = JSON.parse(response.body)
-
-//         console.log('body:', results.Title,
-//             results.Year,
-//             results.Ratings[0].Value,
-//             results.Country,
-//             results.Language,
-//             results.Plot,
-//             results.Actors,
-//             results.Ratings[1].Value
-//         );
-
-//     }
-//     console.log('statusCode:', response.statusCode);
-
-
-// });
